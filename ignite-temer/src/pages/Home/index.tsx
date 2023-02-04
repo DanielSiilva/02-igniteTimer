@@ -1,5 +1,9 @@
 import { Play } from "phosphor-react";
 import { useForm } from "react-hook-form";
+import {zodResolver} from '@hookform/resolvers/zod'
+import * as zod from 'zod' //Usando * as zod, pois a biblioteca não permite que usamos o import default - que seria apenas import zod from 'zod'
+
+
 import { 
     CountdownContainer, 
     FormContainer, 
@@ -12,8 +16,23 @@ import {
 } from "./styled";
 
 
+//Definirmos o Schema da do formulario - sempre observar qual o formato das informação, nesse caso um objeto
+
+const newCycleFormValidationSchema = zod.object({
+    task: zod.string().min(1, 'Informe a tarefea'),
+    minutesAmout: zod
+        .number().min(5, 'O ciclo precisa ser de no mínimo 5 minutos')
+        .max(60, 'O ciclo precisa ser de no máximo 60 minutos')
+})
+
+
+
+
+
 export function Home (){
-     const {register, watch, handleSubmit} = useForm()
+     const {register, watch, handleSubmit} = useForm({
+        resolver: zodResolver(newCycleFormValidationSchema)
+     })
 
      function handleCreateNewCycle( data: any){
         console.log(data)
