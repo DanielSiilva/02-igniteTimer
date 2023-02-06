@@ -30,9 +30,9 @@ const newCycleFormValidationSchema = zod.object({
 type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
 
-//Obs: o Estado é a unica forma de guardamos informações afim de que, elas reagam ao usuarios
+//Obs: o Estado é a unica forma de guardamos informações afim de que, elas reagem as iterações dos  usuarios
 
-//Criar uma interface Para o stato
+//Criar uma interface Para o state
 interface Cycle{
     id: string,
     task: string,
@@ -40,8 +40,9 @@ interface Cycle{
 }
 
 export function Home (){
-    const [cycles, setCycles] = useState<Cycle[]>([])
-    const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
+    const [cycles, setCycles] = useState<Cycle[]>([]);
+    const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
+    const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
 
 
 
@@ -79,7 +80,19 @@ export function Home (){
 
      const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
 
-     console.log(activeCycle)
+     const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
+     const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
+
+     const minutesAmount = Math.floor(currentSeconds/60);
+     const secondsAmount = currentSeconds % 60
+
+     const minutes = String(minutesAmount).padStart(2, '0')
+     const seconds = String(secondsAmount).padStart(2, '0')
+
+
+
+
+
 
      const task = watch('task')
      const isSubmitDisable = !task
@@ -120,11 +133,11 @@ export function Home (){
                 </FormContainer>
 
                 <CountdownContainer>
-                    <span>0</span>
-                    <span>0</span>
+                    <span>{minutes[0]}</span>
+                    <span>{minutes[1]}</span>
                     <Separator>:</Separator>
-                    <span>0</span>
-                    <span>0</span>
+                    <span>{seconds[0]}</span>
+                    <span>{seconds[1]}</span>
                 </CountdownContainer>
 
                 <StartCountdownButton type="submit" disabled={isSubmitDisable}>
