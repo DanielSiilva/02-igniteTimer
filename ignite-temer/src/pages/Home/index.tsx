@@ -14,6 +14,7 @@ import {
     TaskInput 
 
 } from "./styled";
+import { useState } from "react";
 
 
 //Definirmos o Schema da do formulario - sempre observar qual o formato das informação, nesse caso um objeto
@@ -29,8 +30,27 @@ const newCycleFormValidationSchema = zod.object({
 type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
 
+//Obs: o Estado é a unica forma de guardamos informações afim de que, elas reagam ao usuarios
+
+//Criar uma interface Para o stato
+interface Cycle{
+    id: string,
+    task: string,
+    minutesAmount: number
+}
 
 export function Home (){
+    const [cycles, setCycles] = useState<Cycle[]>([])
+    const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
+
+
+
+
+
+    
+
+
+
                                                    //Tipando o useForm
      const {register, watch, handleSubmit, reset} = useForm<NewCycleFormData>({
         resolver: zodResolver(newCycleFormValidationSchema),
@@ -43,11 +63,23 @@ export function Home (){
 
 
      function handleCreateNewCycle( data: NewCycleFormData){
-        console.log(data)
+        const id = String(new Date().getTime())
+
+        const newCycle: Cycle ={
+            id,
+            task: data.task,
+            minutesAmount: data.minutesAmount
+        }
+
+        setCycles((state) => [ ...state, newCycle])
+        setActiveCycleId(id)
 
         reset()
      }
 
+     const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
+
+     console.log(activeCycle)
 
      const task = watch('task')
      const isSubmitDisable = !task
