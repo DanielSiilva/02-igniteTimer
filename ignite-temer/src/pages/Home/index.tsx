@@ -19,7 +19,7 @@ import {
 
 import { useEffect, useState } from "react";
 
-
+// O Prop Drilling é um termo utilizado para quando temos propriedades que estão se repassando em diversas camadas da nossa árvore de componentes.
 
 //Definirmos o Schema da do formulario - sempre observar qual o formato das informação, nesse caso um objeto
 
