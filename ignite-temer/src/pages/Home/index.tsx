@@ -12,6 +12,7 @@ import {
 
 import { NewCycleForm } from './components/NewCycleForm'
 import { Countdown } from './components/Countdown'
+
 interface Cycle {
   id: string
   task: string
@@ -20,6 +21,8 @@ interface Cycle {
   interruptedDate?: Date
   finishedDate?: Date
 }
+
+
 interface CyclesContextType {
   activeCycle: Cycle | undefined
   activeCycleId: string | null
