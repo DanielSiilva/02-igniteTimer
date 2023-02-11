@@ -13,12 +13,19 @@ pude colocar novos conhecimentos em prática tais como: roteamento e diversos co
  &#xa0;
 
 ## :sparkles: Funcionalidades ##
-- [x] Inserção de entradas/saidas
-- [x] Cadastro de categorias
-- [x] Calculo de total de entradas
-- [x] Calculo de total de saídas
-- [x] Calculo de Saldo Restante
+- [x] Inserção de tarefas;
+- [x] finalizar e pausa uma tarefa
+- [x] listar todas as tarefas, mesmo que em execução
  &#xa0;
+
+## 🧠 Aprendizados
+
+-   Conteamento com React-Router;
+-   ContextApi ;
+-   UseForm para validação de formulários;
+-   Zod para validação de formulários;
+-   Immer Js nos permite trabalhar com o geriamentos de dados multáveis;
+-   UseReducer: para gerenciamento de estado
 
 ## :rocket: Tecnologias ##
 
